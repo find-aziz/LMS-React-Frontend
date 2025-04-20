@@ -9,7 +9,10 @@ module.exports = {
         default: ["15px", { lineHeight: "21px" }],
       },
       gridTemplateColumns: {
-        "auto": "repeat(auto-fit, minmax(200px, 1fr))",
+        auto: "repeat(auto-fit, minmax(200px, 1fr))",
+      },
+      spacing: {
+        "section-height": "500px",
       },
     },
   },
