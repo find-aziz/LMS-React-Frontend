@@ -25,7 +25,7 @@ const Footer = () => {
           <h2 className="font-semibold text-white mb-5">Subscribe to our newsletter</h2>
           <p className="text-sm text-white/80">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
           <div className="flex items-center gap-2 pt-4">
-            <input type="email" placeholder="Enter your email" className="border border-gray-500/30 bg-gray-800 text-gray-500 placeholder-gray-500 outline-none w-64 h-9 rounded px2 text-sm" />
+            <input type="email" placeholder="Enter your email" className="border border-gray-500/30 bg-gray-800 text-gray-500 placeholder-gray-500 outline-none w-64 h-9 rounded px-2 text-sm" />
             <button className="bg-blue-600 w-24 h-9 text-white rounded">Subscribe</button>
           </div>
         </div>
