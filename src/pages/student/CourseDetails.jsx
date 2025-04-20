@@ -8,6 +8,7 @@ import humanizeDuration from "humanize-duration";
 const CourseDetails = () => {
   const { id } = useParams();
   const [courseData, setCourseData] = useState(null);
+  const [openSections, setOpenSections] = useState({});
   const {
     allCourses,
     calculateRating,
@@ -22,6 +23,14 @@ const CourseDetails = () => {
   useEffect(() => {
     fetchCourseData();
   }, [courseData]);
+
+  const toggleSection = (index) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
   return courseData ? (
     <>
       <div className="flex md:flex-row flex-col-reverse gap-10 relative items-center justify-between   px-8 pt-20 md:px-36 md:pt-30 text-left">
@@ -76,9 +85,18 @@ const CourseDetails = () => {
                   className="border border-gray-500 bg-white mb-2 rounded"
                   key={i}
                 >
-                  <div className="flex items-center justify-between px-4 py-3 cursor-pointer select-none">
+                  <div
+                    className="flex items-center justify-between px-4 py-3 cursor-pointer select-none"
+                    onClick={() => toggleSection(i)}
+                  >
                     <div className="flex items-center gap-2">
-                      <img src={assets.down_arrow_icon} alt="down_arrow_icon" />
+                      <img
+                        className={`transform transition-transform ${
+                          openSections[i] ? "rotate-180" : ""
+                        }`}
+                        src={assets.down_arrow_icon}
+                        alt="down_arrow_icon"
+                      />
                       <p className="font-medium md:text-base text-sm">
                         {chapter.chapterTitle}
                       </p>
@@ -88,19 +106,27 @@ const CourseDetails = () => {
                       {calculateChapterTime(chapter)}
                     </p>
                   </div>
-                  <div>
-                    <ul>
+                  <div
+                    className={`overflow-hidden  transition-all duration-300 ease-in-out ${
+                      openSections[i] ? "max-h-96" : "max-h-0"
+                    }`}
+                  >
+                    <ul className="list-disc md:pl-10 pl-4 pr-4 py-2 text-gray-600 border-t border-gray-300">
                       {chapter.chapterContent.map((lecture, i) => (
-                        <li key={i}>
+                        <li key={i} className="flex items-center gap-2 py-1">
                           <img
                             src={assets.play_icon}
                             alt="play_icon"
                             className="w-4 h-4 mt-1"
                           />
-                          <div>
+                          <div className="flex items-center justify-between w-full text-gray-800 text-xs md:text-default">
                             <p>{lecture.lectureTitle}</p>
-                            <div>
-                              {lecture.isPreviewFree && <p>Preview</p>}
+                            <div className="flex gap-2">
+                              {lecture.isPreviewFree && (
+                                <p className="text-blue-500 cursor-pointer">
+                                  Preview
+                                </p>
+                              )}
                               <p>
                                 {humanizeDuration(
                                   lecture.lectureDuration * 60 * 1000,
@@ -116,6 +142,17 @@ const CourseDetails = () => {
                 </div>
               ))}
             </div>
+          </div>
+          <div className="py-20 text-sm md:text-default">
+            <h3 className="text-xl font-semibold text-gray-800">
+              Course Description
+            </h3>
+            <p
+              className="pt-3 rich-text"
+              dangerouslySetInnerHTML={{
+                __html: courseData.courseDescription,
+              }}
+            ></p>
           </div>
         </div>
         {/* right column */}
