@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-gray-900 md:px-36 text-left w-full mt-10">
       <div className="flex flex-col md:flex-row items-start px-8 md:px-0 justify-center gap-10 md:gap-32 py-10 border-b border-white/30">
         <div className="flex flex-col items-center md:items-start w-full">
-          <img src={assets.logo_dark} alt="logo" />
+          <img className="h-10" src={assets.logo_dark} alt="logo" />
           <p className="text-white/80 text-center md:text-left text-sm mt-6 ">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis
             quos corrupti sapiente, sequi aliquam velit!
@@ -30,7 +30,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="py-4 text-center text-xs md:text-sm text-white/60">Copyright 2025 © Edemy. All Right Reserved.</p>
+      <p className="py-4 text-center text-xs md:text-sm text-white/60">Copyright 2025 © Learn Hive. All Right Reserved.</p>
     </footer>
   );
 };
